@@ -1,5 +1,6 @@
 package com.example.github_mock.di
 
+import com.example.github_mock.data.local.GitDao
 import com.example.github_mock.domain.GitRepository
 import com.example.github_mock.data.network.GitRepositoryImpl
 import com.example.github_mock.data.network.NetworkService
@@ -33,8 +34,8 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRepo(impl: NetworkService): GitRepository {
-        return GitRepositoryImpl(impl)
+    fun provideRepo(impl: NetworkService, dao: GitDao): GitRepository {
+        return GitRepositoryImpl(impl,dao)
     }
 }
 
