@@ -6,12 +6,7 @@ This is an Android application built with **Kotlin** that allows users to search
 - Fetches new results from an API on new searches
 - Displays results in a WebView
 - Saves every successful query to the local database
-
-  ## Flow Diagram :
-
-  User opens app ──► Loads last query from DB ──► Displays list of Git repositories
-             │
-             └─► User enters new query ──► onClick of Search button ──► Calls API  ──► Saves to DB ──► Loads the result on screen
+  
 ---
 
 ## Features
@@ -47,3 +42,8 @@ This is an Android application built with **Kotlin** that allows users to search
 3. The app sends the query to an **API**.
 4. The result is retrieved and Saved to the Room database as the latest search
 5. The UI is updated to reflect the new result.
+
+## Flow Diagram
+
+![LJI_Assignment](https://github.com/user-attachments/assets/bcc4b2df-6b12-4e1c-b975-abc42a33d427)
+
