@@ -1,12 +1,13 @@
 package com.example.github_mock.presentation
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.github_mock.databinding.GitItemBinding
 import com.example.github_mock.domain.models.GHRepo
 
-class GitAdapter : RecyclerView.Adapter<GitAdapter.ViewHolder>() {
+class GitAdapter(private val onItemClick: (String) -> Unit) : RecyclerView.Adapter<GitAdapter.ViewHolder>() {
 
     private var showList: List<GHRepo> = emptyList()
 
@@ -20,6 +21,10 @@ class GitAdapter : RecyclerView.Adapter<GitAdapter.ViewHolder>() {
         fun onBind(item: GHRepo) {
             binding.tvId.text = item.id.toString()
             binding.tvTitle.text = item.name
+
+            binding.root.setOnClickListener {
+                onItemClick(item.repoURL)
+            }
         }
     }
 

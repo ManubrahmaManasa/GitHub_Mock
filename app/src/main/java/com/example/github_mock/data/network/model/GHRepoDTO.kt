@@ -3,6 +3,7 @@ package com.example.github_mock.data.network.model
 
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.example.github_mock.data.local.models.GHRepoEntity
 import com.example.github_mock.domain.models.GHRepo
 
 @Keep
@@ -238,6 +239,16 @@ data class GHRepoDTO(
 fun GHRepoDTO.toDomainGitList():List<GHRepo>{
     return items.map { gitRepo ->
         GHRepo(
+            id = gitRepo.id,
+            name = gitRepo.name,
+            repoURL = gitRepo.htmlUrl
+        )
+    }
+}
+
+fun GHRepoDTO.toDataGitList():List<GHRepoEntity>{
+    return items.map { gitRepo ->
+        GHRepoEntity(
             id = gitRepo.id,
             name = gitRepo.name,
             repoURL = gitRepo.htmlUrl

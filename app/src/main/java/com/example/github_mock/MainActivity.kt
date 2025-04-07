@@ -1,7 +1,9 @@
 package com.example.github_mock
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.github_mock.databinding.ActivityMainBinding
 import com.example.github_mock.presentation.GitAdapter
 import com.example.github_mock.presentation.GitViewModel
+import com.example.github_mock.presentation.RepoDescriptionActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,9 +33,24 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        adapter = GitAdapter()
+        adapter = GitAdapter(
+            onItemClick = {
+                val intent = Intent(this@MainActivity, RepoDescriptionActivity::class.java)
+                intent.putExtra(RepoDescriptionActivity.URL_KEY, it)
+                startActivity(intent)
+            }
+        )
 
-        viewModel.getGitRepoList()
+        binding.btnSearch.setOnClickListener {
+            val searchQuery = binding.outlinedEditText.text.toString().trim()
+            if (searchQuery.isNullOrBlank()) {
+                Toast.makeText(this, "Please Enter Search Query!!", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.getGitRepoList(searchQuery)
+            }
+
+        }
+
 
         viewModel.gitList.observe(this) { gitList ->
             adapter.updateList(gitList)
