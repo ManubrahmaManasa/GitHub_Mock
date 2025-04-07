@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         )
+        binding.rvRepo.adapter = adapter
 
         binding.btnSearch.setOnClickListener {
             val searchQuery = binding.outlinedEditText.text.toString().trim()
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.gitList.observe(this) { gitList ->
             adapter.updateList(gitList)
-            binding.rvRepo.adapter = adapter
+
         }
 
         viewModel.isLoading.observe(this) {

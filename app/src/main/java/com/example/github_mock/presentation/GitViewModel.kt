@@ -17,7 +17,7 @@ class GitViewModel @Inject constructor(private val repository: GitRepository):Vi
     private val _gitList = MutableLiveData<List<GHRepo>>()
     val gitList:LiveData<List<GHRepo>> = _gitList
 
-    private val _isLoading = MutableLiveData<Boolean>(true)
+    private val _isLoading = MutableLiveData<Boolean>(false)
     val isLoading:LiveData<Boolean> = _isLoading
 
 
@@ -28,6 +28,7 @@ class GitViewModel @Inject constructor(private val repository: GitRepository):Vi
 
     private fun loadInitialData() {
         viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.postValue(true)
             when (val result = repository.loadFromDb()) {
                 is GitResult.Error -> {
                     _gitList.postValue(emptyList())

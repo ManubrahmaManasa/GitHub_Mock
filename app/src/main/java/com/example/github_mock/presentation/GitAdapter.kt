@@ -13,6 +13,7 @@ class GitAdapter(private val onItemClick: (String) -> Unit) : RecyclerView.Adapt
 
     fun updateList(newList: List<GHRepo>) {
         showList = newList
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(private val binding: GitItemBinding) :
